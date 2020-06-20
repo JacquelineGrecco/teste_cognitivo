@@ -21,11 +21,7 @@ if __name__ == "__main__":
     delimiter = ","
     
     # Create the dataframe reading the csv file and custom schema
-    df = spark.read.format(file_type)
-            .option("header", first_row_is_header)
-            .option("sep",delimiter)
-            .schema(schema)
-            .load(csv_file_location)
+    df = spark.read.format(file_type).option("header", first_row_is_header).option("sep",delimiter).schema(schema).load(csv_file_location)
     
     if df.filter(F.col('name').contains('@')):
             df = df.withColumn('aux_email', df['name']).withColumn('name', df['email'])
