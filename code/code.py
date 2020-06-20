@@ -1,4 +1,5 @@
 from functions import * 
+from pyspark.sql import functions as F
 
 
 if __name__ == "__main__":
@@ -25,6 +26,10 @@ if __name__ == "__main__":
             .option("sep",delimiter)
             .schema(schema)
             .load(csv_file_location)
+    
+    if df.filter(F.col('name').contains('@')):
+            df = df.withColumn('aux_email', df['name']).withColumn('name', df['email'])
+            df = df.withColumn('email', df['aux_email']).drop('aux_email')
     
     # Drop all records that are duplicates         
     df_final = df.orderBy('id', 'update_date', ascending= False).dropDuplicates(subset=['id'])
