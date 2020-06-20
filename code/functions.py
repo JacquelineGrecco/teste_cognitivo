@@ -13,8 +13,8 @@ def SparkConfig() -> object:
         .config("spark.scripts_sql.parquet.mergeSchema", "false") \
         .config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "2") \
         .config("spark.speculation", "false") \
-        .config("spark.network.timeout", "10000000") \
-        .config("spark.executor.heartbeatInterval", "10000000") \
+        .config("spark.network.timeout", "600") \
+        .config("spark.executor.heartbeatInterval", "600") \
         .config("spark.executor.memory", "6g") \
         .config("spark.driver.memory", "6g") \
         .config("spark.executor.pyspark.memory", "6g") \
